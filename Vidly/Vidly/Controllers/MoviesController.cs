@@ -1,10 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using Vidly.Models;
-using System.Data.Entity;
+using Vidly.ViewModels;
 
 namespace Vidly.Controllers
 {
@@ -22,6 +21,62 @@ namespace Vidly.Controllers
             _context.Dispose();
         }
 
+        // UPDATE: Customers/Edit
+        public ActionResult Edit(int id)
+        {
+            // Retrieve the movie based on the If from the Database
+            var movie = _context.Movies.SingleOrDefault(c => c.Id == id);
+
+            // If movie doesn't exist take to page 404
+            if (movie == null)
+                return HttpNotFound();
+
+            var viewModel = new MovieFormViewModel
+            {
+                Movie = movie,
+                Genres = _context.Genres.ToList()
+            };
+
+            return View("MovieForm", viewModel);
+        }
+
+        // POST: Movies/Save
+        [HttpPost]
+        public ActionResult Save(Movie movie)
+        {
+            if (movie.Id == 0)
+            {
+                movie.DateAdded = DateTime.Now;
+                _context.Movies.Add(movie);
+            }
+            else
+            {
+                var movieInDb = _context.Movies.Single(c => c.Id == movie.Id);
+
+                movieInDb.Name = movie.Name;
+                movieInDb.ReleaseDate = movie.ReleaseDate;
+                movieInDb.GenreId = movie.GenreId;
+                movieInDb.Stock = movie.Stock;
+            }
+
+            _context.SaveChanges();
+
+            return RedirectToAction("Index", "Movies");
+        }
+
+        // POST: Movies/New
+        public ActionResult New()
+        {
+            var genres = _context.Genres.ToList();
+
+            var viewModel = new MovieFormViewModel
+            {
+                Genres = genres
+            };
+
+            return View("MovieForm", viewModel);
+        }
+
         // GET: Movies
         public ActionResult Index()
         {
@@ -31,13 +86,13 @@ namespace Vidly.Controllers
         }
 
         // GET: Movies/Details/id
-        public ActionResult Details (int id)
+        public ActionResult Details(int id)
         {
             var movie = _context.Movies.Include(c => c.Genre).SingleOrDefault(c => c.Id == id);
 
             return View(movie);
         }
-     
+
         // GET: Movies/Random
         public ActionResult Random()
         {
