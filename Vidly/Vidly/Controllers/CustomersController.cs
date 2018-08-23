@@ -20,7 +20,7 @@ namespace Vidly.Controllers
             _context.Dispose();
         }
 
-        // GET: Customers/Edit
+        // PUT: Customers/Edit
         public ActionResult Edit(int id)
         {
             // Retrieve the Customer based on the If from the Database
