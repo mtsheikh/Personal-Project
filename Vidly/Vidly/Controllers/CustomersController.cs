@@ -94,7 +94,7 @@ namespace Vidly.Controllers
             return View();
         }
 
-        // GET: Customers/Details/[id]
+        // GET: Customers/Details/1
         public ActionResult Details(int id)
         {
             var customer = _context.Customers.Include(c => c.MembershipType).SingleOrDefault(c => c.Id == id);

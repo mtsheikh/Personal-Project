@@ -22,6 +22,7 @@ namespace Vidly.Controllers
         }
 
         // UPDATE: Customers/Edit
+        [Authorize(Roles = RoleName.CanManageMovies)]
         public ActionResult Edit(int id)
         {
             // Retrieve the movie based on the If from the Database
@@ -42,6 +43,7 @@ namespace Vidly.Controllers
         // POST: Movies/Save
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = RoleName.CanManageMovies)]
         public ActionResult Save(Movie movie)
         {
             if (!ModelState.IsValid)
@@ -75,6 +77,7 @@ namespace Vidly.Controllers
         }
 
         // POST: Movies/New
+        [Authorize(Roles = RoleName.CanManageMovies)]
         public ActionResult New()
         {
             var genres = _context.Genres.ToList();
@@ -90,9 +93,11 @@ namespace Vidly.Controllers
         // GET: Movies
         public ActionResult Index()
         {
-            var movies = _context.Movies.Include(c => c.Genre).ToList();
+            if (User.IsInRole(RoleName.CanManageMovies))
+                return View("List");
 
-            return View(movies);
+            return View("ReadOnlyList");
+
         }
 
         // GET: Movies/Details/id
