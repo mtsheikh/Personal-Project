@@ -9,7 +9,7 @@ GAME RULES:
 
 */
 
-var scores, roundscore, activePlayer, gamePlaying, lastDiceRoll;
+var scores, roundscore, activePlayer, gamePlaying, lastDiceRoll, scoreRequired;
 
 init();
 
@@ -53,7 +53,7 @@ document.querySelector(".btn-hold").addEventListener("click", function() {
       scores[activePlayer];
 
     // Check if player won the game
-    if (scores[activePlayer] >= 100) {
+    if (scores[activePlayer] >= scoreRequired) {
       document.querySelector("#name-" + activePlayer).textContent = "Winner!";
       document.querySelector(".dice").style.display = "none";
       document
@@ -69,6 +69,11 @@ document.querySelector(".btn-hold").addEventListener("click", function() {
     }
   }
 });
+
+function showVal(newVal) {
+  document.getElementById("lbl-score").innerHTML = newVal;
+  scoreRequired = newVal;
+}
 
 function nextPlayer() {
   activePlayer = activePlayer === 1 ? 0 : 1;
@@ -91,8 +96,9 @@ function init() {
   roundScore = 0;
   activePlayer = 0;
   gamePlaying = true;
-  document.querySelector(".dice").style.display = "none";
+  scoreRequired = 55;
 
+  document.querySelector(".dice").style.display = "none";
   document.getElementById("score-0").textContent = "0";
   document.getElementById("score-1").textContent = "0";
   document.getElementById("current-0").textContent = "0";
@@ -104,6 +110,9 @@ function init() {
   document.querySelector(".player-0-panel").classList.remove("active");
   document.querySelector(".player-0-panel").classList.add("active");
   document.querySelector(".player-1-panel").classList.remove("active");
+
+  document.getElementById("lbl-score").textContent = scoreRequired;
+  document.getElementById("score-slider").value = scoreRequired;
 }
 
 document.querySelector(".btn-new").addEventListener("click", init);
