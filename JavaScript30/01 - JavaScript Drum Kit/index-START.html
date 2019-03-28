@@ -8,39 +8,84 @@
   </head>
   <body>
     <div class="keys">
-      <div data-key="65" class="playing">
+      <div
+        data-key="65"
+        class="key"
+        onmousedown="toggleStylesForA()"
+        onmouseup="toggleStylesForA()"
+      >
         <kbd>A</kbd>
         <span class="sound">clap</span>
       </div>
-      <div data-key="83" class="key">
+      <div
+        data-key="83"
+        class="key"
+        onmousedown="toggleStylesForS()"
+        onmouseup="toggleStylesForS()"
+      >
         <kbd>S</kbd>
         <span class="sound">hihat</span>
       </div>
-      <div data-key="68" class="key">
+      <div
+        data-key="68"
+        class="key"
+        onmousedown="toggleStylesForD()"
+        onmouseup="toggleStylesForD()"
+      >
         <kbd>D</kbd>
         <span class="sound">kick</span>
       </div>
-      <div data-key="70" class="key">
+      <div
+        data-key="70"
+        class="key"
+        onmousedown="toggleStylesForF()"
+        onmouseup="toggleStylesForF()"
+      >
         <kbd>F</kbd>
         <span class="sound">openhat</span>
       </div>
-      <div data-key="71" class="key">
+      <div
+        data-key="71"
+        class="key"
+        onmousedown="toggleStylesForG()"
+        onmouseup="toggleStylesForG()"
+      >
         <kbd>G</kbd>
         <span class="sound">boom</span>
       </div>
-      <div data-key="72" class="key">
+      <div
+        data-key="72"
+        class="key"
+        onmousedown="toggleStylesForH()"
+        onmouseup="toggleStylesForH()"
+      >
         <kbd>H</kbd>
         <span class="sound">ride</span>
       </div>
-      <div data-key="74" class="key">
+      <div
+        data-key="74"
+        class="key"
+        onmousedown="toggleStylesForJ()"
+        onmouseup="toggleStylesForJ()"
+      >
         <kbd>J</kbd>
         <span class="sound">snare</span>
       </div>
-      <div data-key="75" class="key">
+      <div
+        data-key="75"
+        class="key"
+        onmousedown="toggleStylesForK()"
+        onmouseup="toggleStylesForK()"
+      >
         <kbd>K</kbd>
         <span class="sound">tom</span>
       </div>
-      <div data-key="76" class="key">
+      <div
+        data-key="76"
+        class="key"
+        onmousedown="toggleStylesForL()"
+        onmouseup="toggleStylesForL()"
+      >
         <kbd>L</kbd>
         <span class="sound">tink</span>
       </div>
@@ -56,6 +101,170 @@
     <audio data-key="75" src="sounds/tom.wav"></audio>
     <audio data-key="76" src="sounds/tink.wav"></audio>
 
-    <script></script>
+    <script>
+      let keys = document.querySelectorAll(".key");
+
+      let audio = document.querySelectorAll("audio");
+
+      function toggleStylesForA() {
+        keys[0].classList.toggle("playing");
+      }
+      function toggleStylesForS() {
+        keys[1].classList.toggle("playing");
+      }
+      function toggleStylesForD() {
+        keys[2].classList.toggle("playing");
+      }
+      function toggleStylesForF() {
+        keys[3].classList.toggle("playing");
+      }
+      function toggleStylesForG() {
+        keys[4].classList.toggle("playing");
+      }
+      function toggleStylesForH() {
+        keys[5].classList.toggle("playing");
+      }
+      function toggleStylesForJ() {
+        keys[6].classList.toggle("playing");
+      }
+      function toggleStylesForK() {
+        keys[7].classList.toggle("playing");
+      }
+      function toggleStylesForL() {
+        keys[8].classList.toggle("playing");
+      }
+
+      function playSoundForA() {
+        audio[0].play();
+      }
+      function playSoundForS() {
+        audio[1].play();
+      }
+      function playSoundForD() {
+        audio[2].play();
+      }
+      function playSoundForF() {
+        audio[3].play();
+      }
+      function playSoundForG() {
+        audio[4].play();
+      }
+      function playSoundForH() {
+        audio[5].play();
+      }
+      function playSoundForJ() {
+        audio[6].play();
+      }
+      function playSoundForK() {
+        audio[7].play();
+      }
+      function playSoundForL() {
+        audio[8].play();
+      }
+
+      window.addEventListener("keydown", checkKeyDown, false);
+
+      function checkKeyDown(e) {
+        switch (e.keyCode) {
+          // For Letter A
+          case 65:
+            toggleStylesForA();
+            playSoundForA();
+            break;
+          // For Letter S
+          case 83:
+            toggleStylesForS();
+            playSoundForS();
+            break;
+          // For Letter D
+          case 68:
+            toggleStylesForD();
+            playSoundForD();
+            break;
+          // For Letter F
+          case 70:
+            toggleStylesForF();
+            playSoundForF();
+            break;
+          // For Letter G
+          case 71:
+            toggleStylesForG();
+            playSoundForG();
+            break;
+          // For Letter H
+          case 72:
+            toggleStylesForH();
+            playSoundForH();
+            break;
+          // For Letter J
+          case 74:
+            toggleStylesForJ();
+            playSoundForJ();
+            break;
+          // For Letter K
+          case 75:
+            toggleStylesForK();
+            playSoundForK();
+            break;
+          // For Letter L
+          case 76:
+            toggleStylesForL();
+            playSoundForL();
+            break;
+        }
+      }
+
+      window.addEventListener("keyup", checkKeyDown, false);
+
+      function checkKeyDown(e) {
+        switch (e.keyCode) {
+          // For Letter A
+          case 65:
+            toggleStylesForA();
+            playSoundForA();
+            break;
+          // For Letter S
+          case 83:
+            toggleStylesForS();
+            playSoundForS();
+            break;
+          // For Letter D
+          case 68:
+            toggleStylesForD();
+            playSoundForD();
+            break;
+          // For Letter F
+          case 70:
+            toggleStylesForF();
+            playSoundForF();
+            break;
+          // For Letter G
+          case 71:
+            toggleStylesForG();
+            playSoundForG();
+            break;
+          // For Letter H
+          case 72:
+            toggleStylesForH();
+            playSoundForH();
+            break;
+          // For Letter J
+          case 74:
+            toggleStylesForJ();
+            playSoundForJ();
+            break;
+          // For Letter K
+          case 75:
+            toggleStylesForK();
+            playSoundForK();
+            break;
+          // For Letter L
+          case 76:
+            toggleStylesForL();
+            playSoundForL();
+            break;
+        }
+      }
+    </script>
   </body>
 </html>
